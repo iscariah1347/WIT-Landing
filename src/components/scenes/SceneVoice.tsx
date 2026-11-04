@@ -1,6 +1,10 @@
 "use client";
 
+import { useState } from "react";
+
+import { ClaraTryModal } from "@/components/contact/ClaraTryModal";
 import { CallDemo } from "@/components/demos/CallDemo";
+import { Button } from "@/components/ui/Button";
 import { getProduct } from "@/config/products";
 
 import { SceneShell } from "./SceneShell";
@@ -8,6 +12,8 @@ import { SceneShell } from "./SceneShell";
 const product = getProduct("voice-receptor");
 
 export function SceneVoice() {
+  const [tryOpen, setTryOpen] = useState(false);
+
   return (
     <SceneShell id={product.sceneId} aria-labelledby="voice-title">
       <div className="container-page grid items-center gap-5 lg:grid-cols-[0.95fr_1.05fr] lg:gap-14">
@@ -30,12 +36,24 @@ export function SceneVoice() {
               </li>
             ))}
           </ul>
+          <div className="mt-6 md:mt-8">
+            <Button
+              type="button"
+              variant="primary"
+              className="px-6"
+              onClick={() => setTryOpen(true)}
+            >
+              Pruébame
+            </Button>
+          </div>
         </div>
 
         <div data-voice-demo>
           <CallDemo className="w-full" />
         </div>
       </div>
+
+      <ClaraTryModal open={tryOpen} onClose={() => setTryOpen(false)} />
     </SceneShell>
   );
 }
