@@ -4,7 +4,6 @@ import Image from "next/image";
 import { useState } from "react";
 
 import { DemoRequestModal } from "@/components/contact/DemoRequestModal";
-import { WorkInProgressModal } from "@/components/contact/WorkInProgressModal";
 import { Magnetic } from "@/components/motion/Magnetic";
 import { Button } from "@/components/ui/Button";
 import { siteConfig } from "@/config/site";
@@ -13,7 +12,6 @@ import { SceneShell } from "./SceneShell";
 
 export function SceneClosing() {
   const [demoOpen, setDemoOpen] = useState(false);
-  const [wipOpen, setWipOpen] = useState(false);
 
   return (
     <SceneShell
@@ -49,11 +47,8 @@ export function SceneClosing() {
           tus comunidades.
         </p>
 
-        <div
-          data-close-ctas
-          className="mt-8 flex w-full max-w-xl flex-col items-stretch gap-3 sm:mt-10 sm:flex-row sm:justify-center sm:gap-8"
-        >
-          <Magnetic className="block w-full flex-1 sm:max-w-[17.5rem]">
+        <div data-close-ctas className="mt-8 flex justify-center sm:mt-10">
+          <Magnetic className="block w-full max-w-[17.5rem]">
             {siteConfig.demoRequestUrl ? (
               <Button
                 as="a"
@@ -74,21 +69,10 @@ export function SceneClosing() {
               </Button>
             )}
           </Magnetic>
-          <Magnetic className="block w-full flex-1 sm:max-w-[17.5rem]" strength={0.18}>
-            <Button
-              type="button"
-              variant="secondary"
-              className="w-full"
-              onClick={() => setWipOpen(true)}
-            >
-              Prueba nuestra DEMO
-            </Button>
-          </Magnetic>
         </div>
       </div>
 
       <DemoRequestModal open={demoOpen} onClose={() => setDemoOpen(false)} />
-      <WorkInProgressModal open={wipOpen} onClose={() => setWipOpen(false)} />
     </SceneShell>
   );
 }
